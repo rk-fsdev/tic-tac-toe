@@ -46,16 +46,14 @@ const Board: React.FC = () => {
   };
 
   let status: string = '';
-  let isGameEnded: boolean = false;
-  const winner = calculateWinner(squares, SIZE);
-  if (winner) {
-    status = `Winner: ${VALUE_MATCH[winner]}`;
-    isGameEnded = true;
+  let isGameEnded: boolean = totalSquareFilled === SIZE * SIZE;
+  if (isGameEnded) {
+    const winner = calculateWinner(squares, SIZE);
+    if (winner) {
+      status = `Winner: ${VALUE_MATCH[winner]}`;
+    } else status = 'Draw';
   } else {
-    if (totalSquareFilled === SIZE * SIZE) {
-      status = 'Draw';
-      isGameEnded = true;
-    } else status = `Next player: ${VALUE_MATCH[whoIsNext]}`;
+    status = `Next player: ${VALUE_MATCH[whoIsNext]}`;
   }
 
   return (
